@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Portfolio() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Portfolio Screen</Text>
+      <Text>Portfolio Screenㅁㄴㄹㅁㅁㄴㄹㄹ</Text>
     </View>
   );
 }
