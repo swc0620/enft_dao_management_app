@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, ScrollView } from "react-native";
-import GovernUserList from "../components/GovernUserList";
+import GovernerList from "../components/GovernerList";
 import GovernList from "../components/GovernList";
 import { List } from "react-native-paper";
 
-const governUserDummy = [
+const governerDummy = [
   {
     telegramId: "jay",
     share: 10,
@@ -24,6 +24,8 @@ const governUserDummy = [
   },
 ];
 
+const totalShare = 100;
+
 const governDummy = [
   {
     nftId: "03jna9",
@@ -41,21 +43,41 @@ const governDummy = [
 
 export default function Govern() {
   return (
-    <ScrollView>
-      <List.Section style={{ justifyContent: "center" }}>
-        {governUserDummy.map((v, i) => {
-          return (
-            <GovernUserList
-              index={i + 1}
-              id={v.telegramId}
-              share={v.share}
-            />
-          );
-        })}
-      </List.Section>
-    </ScrollView>
-  );
-}
+    <ScrollView nestedScrollEnabled = {true}>
+      <ScrollView>        
+        <List.Section style={{ justifyContent: "center" }}>
+          <List.Subheader> Governers</List.Subheader>
+            {governerDummy.map((v, i) => {
+              return (
+                <GovernerList
+                  index={i + 1}
+                  telegramId={v.telegramId}
+                  share={v.share}
+                  shareportion = {v.share/totalShare}
+                />
+              );
+            })}
+        </List.Section>
+      </ScrollView>
+      <ScrollView>        
+        <List.Section style={{ justifyContent: "center" }}>
+          <List.Subheader> Governs</List.Subheader>
+            {governDummy.map((v, i) => {
+              return (
+                <GovernList
+                  index={i + 1}
+                  nftId={v.nftId}
+                  price={v.price}
+                  votes={v.votes}
+                  approveRate={v.approveRate}
+                />
+              );
+            })}
+        </List.Section>
+      </ScrollView>
+    </ScrollView> 
+    );
+  }
 
 const styles = StyleSheet.create({
   container: {
