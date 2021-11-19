@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 import { List } from "react-native-paper";
 
 type GovernListProp = {
@@ -8,29 +8,31 @@ type GovernListProp = {
   price: number;
   votes: number;
   approveRate: number;
+  project : string;
+  type : string;
 };
 
 export default function GovernList(props: GovernListProp) {
-  const { index, nftId, price, votes, approveRate } = props;
+  const { index, nftId, price, votes, approveRate, project, type } = props;
   return (
     <List.Item
     
       title={`${nftId}`}
-      description ={`Purchasing for ${price} ETH`}
+      description ={`Purchase for ${price} ETH,\n${project}, ${type}`}
       left={(props) => (
         <>
           {
             (index % 10 == 1) &&
-            <Text>{index}st govern</Text>}
+            <Text>{index}st NFT</Text>}
           {
             (index % 10 == 2) &&
-            <Text>{index}nd govern</Text>}  
+            <Text>{index}nd NFT</Text>}  
           {
             (index % 10 == 3) &&
-            <Text>{index}rd govern</Text>}
+            <Text>{index}rd NFT</Text>}
           {
             (index % 10 > 3) &&
-            <Text>{index}th govern</Text>}  
+            <Text>{index}th NFT</Text>}  
         </>
       )}
       right={(props) => (

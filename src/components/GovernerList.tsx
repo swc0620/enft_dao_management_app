@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text } from "react-native";
 import { List } from "react-native-paper";
 
 type GovernerListProp = {
@@ -13,9 +13,9 @@ export default function GovernerList(props: GovernerListProp) {
   const { index, telegramId, share, shareportion } = props;
   return (
     <List.Item
-    
+
       title={`${telegramId}`}
-      description ={share}
+      description ={`${share} ETH`}
       left={(props) => (
         <>
           {
@@ -34,7 +34,7 @@ export default function GovernerList(props: GovernerListProp) {
       )}
       right={(props) => (
         <>
-          <Text>{`${shareportion*100}%`}</Text>
+          <Text>{`${(shareportion*100).toFixed(2)}%`}</Text>
         </>
       )}
     />

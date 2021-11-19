@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import GovernerList from "../components/GovernerList";
 import GovernList from "../components/GovernList";
 import { List } from "react-native-paper";
@@ -8,36 +7,41 @@ import { List } from "react-native-paper";
 const governerDummy = [
   {
     telegramId: "jay",
-    share: 10,
+    share: 6,
   },
   {
     telegramId: "decipher",
-    share: 20,
+    share: 8,
   },
   {
     telegramId: "potato",
-    share: 30,
+    share: 25,
   },
   {
     telegramId: "dokwon",
-    share: 40,
+    share: 5,
   },
 ];
 
-const totalShare = 100;
+const totalShare = 44;
 
 const governDummy = [
   {
-    nftId: "03jna9",
+    nftId: "03JNA9",
     price: 20,
     votes: 15,
     approveRate: 15,
+    project:'BAYC',
+    type:'AVATAR'
   },
   {
-    nftId: "sdafsj3",
+    nftId: "SDAFKN3",
     price: 10,
     votes: 30,
-    approveRate: 45,
+    approveRate: 30,
+    project:'Decentraland',
+    type:'LAND'
+
   },
 ];
 
@@ -61,7 +65,7 @@ export default function Govern() {
       </ScrollView>
       <ScrollView>        
         <List.Section style={{ justifyContent: "center" }}>
-          <List.Subheader> Governs</List.Subheader>
+          <List.Subheader>Governs</List.Subheader>
             {governDummy.map((v, i) => {
               return (
                 <GovernList
@@ -70,6 +74,8 @@ export default function Govern() {
                   price={v.price}
                   votes={v.votes}
                   approveRate={v.approveRate}
+                  project = {v.project}
+                  type = {v.type}
                 />
               );
             })}
