@@ -11,14 +11,14 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <PaperProvider>
+    <PaperProvider>
+      <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="portfolio" component={Portfolio} />
           <Stack.Screen name="governance" component={Governance} />
         </Stack.Navigator>
-      </PaperProvider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
 
