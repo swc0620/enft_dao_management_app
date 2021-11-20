@@ -23,10 +23,9 @@ export default function App() {
       
         <Stack.Navigator>
         
-          <Stack.Screen name="Governance" component={Govern} />
+          {/* <Stack.Screen name="Governance" component={Govern} /> */}
           
           <Stack.Screen name="portfolio" component={Portfolio} />
-          <Stack.Screen name="governance" component={Governance} />
         </Stack.Navigator>
         
         </NavigationContainer>
