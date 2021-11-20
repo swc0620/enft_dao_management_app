@@ -13,6 +13,7 @@ const dummyStakeData = [
 export default function Portfolio() {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <Text>Portfolio Screenㅁㄴㄹㅁㅁㄴㄹㄹ</Text>
       <VictoryPie 
         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
         data={dummyStakeData}
