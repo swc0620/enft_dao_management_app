@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Govern from "./src/pages/Govern";
 import Portfolio from "./src/pages/Portfolio";
-import Governance from "./src/pages/Governance";
+import GovernDetail from "./src/pages/GovernDetail";
 
 const Stack = createNativeStackNavigator();
 
@@ -22,10 +22,14 @@ export default function App() {
       <NavigationContainer>
       
         <Stack.Navigator>
-        
-          {/* <Stack.Screen name="Governance" component={Govern} /> */}
           
-          <Stack.Screen name="portfolio" component={Portfolio} />
+
+        <Stack.Screen name="Governance Detail" component={GovernDetail} />
+        {/* <Stack.Screen name="Governance" component={Govern} /> */}
+          
+
+          
+          
         </Stack.Navigator>
         
         </NavigationContainer>

@@ -6,7 +6,7 @@ import { List } from "react-native-paper";
 
 const governerDummy = [
   {
-    telegramId: "jay",
+    telegramId: "jayasdf",
     share: 6,
   },
   {
@@ -14,7 +14,7 @@ const governerDummy = [
     share: 8,
   },
   {
-    telegramId: "potato",
+    telegramId: "potatoosos",
     share: 25,
   },
   {
