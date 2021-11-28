@@ -13,7 +13,6 @@ export const VotingResultCheck = (props: VotingResultCheckProps) => {
     const { index, telegramId, shareportion, voted } = props;
   return (
     <List.Item
-
       title={`${telegramId}`}
       description ={`${(shareportion*100).toFixed(2)}%`}
       left={(props) => (
