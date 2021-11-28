@@ -3,7 +3,6 @@ import { StyleSheet, ScrollView, View } from "react-native";
 import { Avatar, Text, List } from "react-native-paper";
 import { VotingResultCheck } from "../components/VotingResultCheck";
 import { NFTDetailInfo } from "../components/NFTDetailInfo";
-import { ProgressBarFunc } from "../components/ProgressBarFunc";
 
 const nftDummy = {
     nftId: "03JNA9",
@@ -12,7 +11,7 @@ const nftDummy = {
     approveRate: 81.81,
     project:'BAYC',
     type:'AVATAR',
-    onVoting: true
+    onVoting: false
 }
 
 const governerDummy = [{
@@ -34,12 +33,12 @@ const governerDummy = [{
         telegramId: "dokwon",
         share: 5,
         voted: true,
-    },
+    }
 ];
       
-const totalShare = 44;    
+const totalShare = 44;
 
-function GovernDetail(){
+function PortfolioDetail() {
     return(
         <ScrollView>
             <View style={styles.imageContainer}>
@@ -56,36 +55,31 @@ function GovernDetail(){
                         project={nftDummy.project}
                         type={nftDummy.type}
                         price={nftDummy.price}
-                        onVoting={nftDummy.onVoting}
+                        onVoting={nftDummy.onVoting}                   
                     >
                     </NFTDetailInfo>
                 </Text>
             </View>
 
-            <View style={ styles.progressBar }> 
-                <ProgressBarFunc
-                    votes={nftDummy.votes}
-                    approveRate={nftDummy.approveRate}>
-                </ProgressBarFunc>
+            <View>
+                <List.Section style={styles.votingResult}>
+                    <List.Subheader>Governers</List.Subheader>
+                        {governerDummy.map((value, index) => {
+                            return (
+                                <VotingResultCheck
+                                    index={index + 1}
+                                    telegramId={value.telegramId}
+                                    shareportion={value.share/totalShare}
+                                    voted={value.voted}  
+                                />
+                            );
+                        })}
+                </List.Section>
             </View>
-            
-            <List.Section style={ styles.votingResult }>
-                <List.Subheader>Governers</List.Subheader>
-                    {governerDummy.map((value, index) => {
-                    return (
-                        <VotingResultCheck
-                            index={index + 1}
-                            telegramId={value.telegramId}
-                            shareportion={value.share/totalShare}
-                            voted={value.voted}  
-                        />
-                    );
-                    })}
-            </List.Section>
         </ScrollView>
     )
 }
-export default GovernDetail
+export default PortfolioDetail
 
 const styles = StyleSheet.create({
     imageContainer: {
@@ -95,7 +89,6 @@ const styles = StyleSheet.create({
         alignItems:'center',
         flexDirection:'row',
         justifyContent:'center',
-        
     },
     description: {
         flex: 1,
@@ -105,14 +98,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'white',
         padding:2,
-    },
-    progressBar: {
-        padding:20,        
-        backgroundColor: 'grey',
-    
+      },
+    listing: {
+        flex: 1,
+        height:'100%',
+        width:'100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'white',
+        padding:2,
     },
     votingResult: {
         justifyContent: "center"
     }
-  }
-);
+});
