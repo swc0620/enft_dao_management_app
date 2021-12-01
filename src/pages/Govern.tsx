@@ -1,25 +1,29 @@
 import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
-import GovernerList from "../components/GovernerList";
-import GovernList from "../components/GovernList";
+import { GovernerList } from "../components/GovernerList";
+import { GovernList }from "../components/GovernList";
 import { List } from "react-native-paper";
 
 const governerDummy = [
   {
     telegramId: "jay",
     share: 6,
+    voted: true,
   },
   {
     telegramId: "decipher",
     share: 8,
+    voted: false,
   },
   {
     telegramId: "potato",
     share: 25,
+    voted: true,
   },
   {
     telegramId: "dokwon",
     share: 5,
+    voted: true,
   },
 ];
 
@@ -29,8 +33,8 @@ const governDummy = [
   {
     nftId: "03JNA9",
     price: 20,
-    votes: 15,
-    approveRate: 15,
+    votes: 3,
+    approveRate: 81.81,
     project:'BAYC',
     type:'AVATAR'
   },
@@ -58,6 +62,7 @@ export default function Govern() {
                   telegramId={v.telegramId}
                   share={v.share}
                   shareportion = {v.share/totalShare}
+                  voted = {v.voted}
                 />
               );
             })}

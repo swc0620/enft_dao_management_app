@@ -12,7 +12,7 @@ type GovernListProp = {
   type : string;
 };
 
-export default function GovernList(props: GovernListProp) {
+export function GovernList(props: GovernListProp) {
   const { index, nftId, price, votes, approveRate, project, type } = props;
   return (
     <List.Item

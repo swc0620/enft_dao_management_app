@@ -7,9 +7,10 @@ type GovernerListProp = {
   telegramId: string;
   share: number;
   shareportion : number;
+  voted : boolean;
 };
 
-export default function GovernerList(props: GovernerListProp) {
+export function GovernerList(props: GovernerListProp) {
   const { index, telegramId, share, shareportion } = props;
   return (
     <List.Item

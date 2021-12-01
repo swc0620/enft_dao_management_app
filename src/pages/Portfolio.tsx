@@ -1,6 +1,5 @@
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, ScrollView } from "react-native";
+import { StyleSheet, ScrollView } from "react-native";
 import PortfolioList from "../components/PortfolioList";
 import { List } from "react-native-paper";
 import { VictoryPie } from 'victory-native';
@@ -50,7 +49,6 @@ const dummyStakeData = [
   { x: 'Shin', y: 200}
 ]
 
-
 export default function Portfolio() {
   return (
     <ScrollView>
@@ -58,15 +56,15 @@ export default function Portfolio() {
         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
         data={dummyStakeData}
       />
-      <List.Section style={{ justifyContent: "center" }}>
-        {portfolioDummy.map((v, i) => {
+      <List.Section style={ styles.portfolioList }>
+        {portfolioDummy.map((value, index) => {
           return (
             <PortfolioList
-              index={i + 1}
-              title={v.title}
-              description={v.description}
-              imageUrl={v.imageUrl}
-              price={v.price}
+              index={index+1}
+              title={value.title}
+              description={value.description}
+              imageUrl={value.imageUrl}
+              price={value.price}
             />
           );
         })}
@@ -82,4 +80,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  portfolioList: {
+    justifyContent: "center"
+  }
 });
