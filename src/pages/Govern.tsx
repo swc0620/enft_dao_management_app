@@ -1,107 +1,101 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, ScrollView } from "react-native";
-import { GovernerList } from "../components/GovernerList";
-import { GovernList } from "../components/GovernList";
-import { List } from "react-native-paper";
-import axios from 'axios';
-
-const governerDummy = [
-  {
-    telegramId: "jay",
-    share: 6,
-    voted: true,
-  },
-  {
-    telegramId: "decipher",
-    share: 8,
-    voted: false,
-  },
-  {
-    telegramId: "potato",
-    share: 25,
-    voted: true,
-  },
-  {
-    telegramId: "dokwon",
-    share: 5,
-    voted: true,
-  },
-];
-
-const totalShare = 44;
-
-const governDummy = [
-  {
-    nftId: "03JNA9",
-    price: 20,
-    votes: 3,
-    approveRate: 81.81,
-    project: 'BAYC',
-    type: 'AVATAR'
-  },
-  {
-    nftId: "SDAFKN3",
-    price: 10,
-    votes: 30,
-    approveRate: 30,
-    project: 'Decentraland',
-    type: 'LAND'
-
-  },
-];
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, ScrollView } from 'react-native'
+import { GovernerList } from '../components/GovernerList'
+import { GovernList } from '../components/GovernList'
+import { List } from 'react-native-paper'
+import axios from 'axios'
+import { Box } from 'victory-native'
+import { Governer, NFT } from '../common/types'
 
 export default function Govern() {
-  const [data, setData] = useState({});
+  const [govDistributionData, setgovDistributionData] = useState<
+    Governer[] | null
+  >(null)
+  const [totalShare, setTotalShare] = useState<number>(0)
+  const [nfts, setVotes] = useState<NFT[] | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  useEffect(async function () {
-    const result = await axios(
-      'http://127.0.0.1:5000/dao/-443191914/detail'
+  async function fetchData() {
+    const result = await axios.get(
+      'https://us-central1-enft-project.cloudfunctions.net/main/dao/-443191914/detail',
     )
-  }, []);
 
+    console.log(result.data)
+    const gov_distribution_raw = result.data.gov_distribution
+    let distribution_array: Governer[] = []
+    let totalShare: number = 0
+    Object.keys(gov_distribution_raw).forEach((k) => {
+      distribution_array.push({
+        telegramId: gov_distribution_raw[k].telegramId,
+        share: gov_distribution_raw[k].eth,
+        voted: true,
+      })
+      totalShare += gov_distribution_raw[k].eth
+    })
+    setgovDistributionData(distribution_array)
+    setTotalShare(totalShare)
+
+    let nfts: NFT[] = []
+    const nft_holdings = result.data.nft_holdings
+    Object.keys(nft_holdings).forEach((k) => {
+      nfts.push(nft_holdings[k])
+    })
+    setVotes(nfts)
+
+    setLoading(true)
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
   return (
     <ScrollView nestedScrollEnabled={true}>
-      <ScrollView>
-        <List.Section style={{ justifyContent: "center" }}>
-          <List.Subheader> Governers</List.Subheader>
-          {governerDummy.map((v, i) => {
-            return (
-              <GovernerList
-                index={i + 1}
-                telegramId={v.telegramId}
-                share={v.share}
-                shareportion={v.share / totalShare}
-                voted={v.voted}
-              />
-            );
-          })}
-        </List.Section>
-      </ScrollView>
-      <ScrollView>
-        <List.Section style={{ justifyContent: "center" }}>
-          <List.Subheader>Governs</List.Subheader>
-          {governDummy.map((v, i) => {
-            return (
-              <GovernList
-                index={i + 1}
-                nftId={v.nftId}
-                price={v.price}
-                votes={v.votes}
-                approveRate={v.approveRate}
-                project={v.project}
-                type={v.type}
-              />
-            );
-          })}
-        </List.Section>
-      </ScrollView>
+      {loading && <Box>Loading..</Box>}
+      {govDistributionData && nfts && (
+        <>
+          <ScrollView>
+            <List.Section style={{ justifyContent: 'center' }}>
+              <List.Subheader> Governers</List.Subheader>
+              {govDistributionData.map((v, i) => {
+                return (
+                  <GovernerList
+                    index={i + 1}
+                    telegramId={v.telegramId}
+                    share={v.share}
+                    shareportion={v.share / totalShare}
+                    voted={v.voted}
+                  />
+                )
+              })}
+            </List.Section>
+          </ScrollView>
+          <ScrollView>
+            <List.Section style={{ justifyContent: 'center' }}>
+              <List.Subheader>Governs</List.Subheader>
+              {nfts.map((v, i) => {
+                return (
+                  <GovernList
+                    index={i + 1}
+                    nftId={v.nftId}
+                    price={v.price}
+                    votes={v.votes}
+                    approveRate={v.approveRate}
+                    project={v.project}
+                    type={v.type}
+                  />
+                )
+              })}
+            </List.Section>
+          </ScrollView>
+        </>
+      )}
     </ScrollView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
   },
-});
+})
