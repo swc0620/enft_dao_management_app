@@ -13,7 +13,7 @@ export default function Govern() {
   >(null)
   const [totalShare, setTotalShare] = useState<number>(0)
   const [nfts, setVotes] = useState<NFT[] | null>(null)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   async function fetchData() {
     const result = await axios.get(
@@ -42,7 +42,7 @@ export default function Govern() {
     })
     setVotes(nfts)
 
-    setLoading(true)
+    setLoading(false)
   }
 
   useEffect(() => {
