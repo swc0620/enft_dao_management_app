@@ -8,10 +8,11 @@ type PortfolioListProp = {
   description: string;
   imageUrl: string;
   price: number;
+  onPress?: () => void;
 };
 
 export default function PortfolioList(props: PortfolioListProp) {
-  const { title, description, imageUrl, index, price } = props;
+  const { title, description, imageUrl, index, price, onPress } = props;
   return (
     <List.Item
       title={title}
@@ -32,6 +33,7 @@ export default function PortfolioList(props: PortfolioListProp) {
           <Text>{`$${price}`}</Text>
         </>
       )}
+      onPress={onPress}
     />
   );
 }

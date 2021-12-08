@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, ScrollView } from "react-native";
 import PortfolioList from "../components/PortfolioList";
 import { List } from "react-native-paper";
-import { VictoryPie } from 'victory-native';
+import { VictoryPie } from "victory-native";
 
 const portfolioDummy = [
   {
@@ -43,28 +43,30 @@ const portfolioDummy = [
 ];
 
 const dummyStakeData = [
-  { x: 'Nam', y: 35 },
-  { x: 'Jang', y: 45 },
-  { x: 'Jeong', y: 75 },
-  { x: 'Shin', y: 200}
-]
+  { x: "Nam", y: 35 },
+  { x: "Jang", y: 45 },
+  { x: "Jeong", y: 75 },
+  { x: "Shin", y: 200 },
+];
 
-export default function Portfolio() {
+export default function Portfolio({ navigation }) {
   return (
     <ScrollView>
       <VictoryPie
-        colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
+        colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
         data={dummyStakeData}
       />
-      <List.Section style={ styles.portfolioList }>
+      <List.Section style={styles.portfolioList}>
         {portfolioDummy.map((value, index) => {
           return (
             <PortfolioList
-              index={index+1}
+              key={index}
+              index={index + 1}
               title={value.title}
               description={value.description}
               imageUrl={value.imageUrl}
               price={value.price}
+              onPress={() => navigation.navigate("Portfolio Detail")}
             />
           );
         })}
@@ -81,6 +83,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   portfolioList: {
-    justifyContent: "center"
-  }
+    justifyContent: "center",
+  },
 });
