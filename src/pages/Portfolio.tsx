@@ -7,52 +7,7 @@ import axios from 'axios'
 import { Box } from 'victory-native'
 import { NFT, portfolioWeight } from '../common/types'
 
-const portfolioDummy = [
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-]
-
-const dummyStakeData = [
-  { x: 'Nam', y: 35 },
-  { x: 'Jang', y: 45 },
-  { x: 'Jeong', y: 75 },
-  { x: 'Shin', y: 200 },
-]
-
-export default function Portfolio() {
+export default function Portfolio({ navigation }: any) {
   const [nfts, setVotes] = useState<NFT[] | null>(null)
   const [portfolioWeights, setPortfolioWeights] = useState<
     portfolioWeight[] | null
@@ -89,30 +44,29 @@ export default function Portfolio() {
   useEffect(() => {
     fetchData()
   }, [])
+
+
   return (
     <ScrollView>
-      {loading && <Box>Loading..</Box>}
-      {nfts && portfolioWeights && (
-        <>
-          <VictoryPie
-            colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
-            data={portfolioWeights}
-          />
-          <List.Section style={styles.portfolioList}>
-            {nfts.map((value, index) => {
-              return (
-                <PortfolioList
-                  index={index + 1}
-                  title={value.nftId}
-                  description={value.project}
-                  imageUrl={value.project}
-                  price={value.price}
-                />
-              )
-            })}
-          </List.Section>
-        </>
-      )}
+      <VictoryPie
+        colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
+        data={portfolioWeights!}
+      />
+      <List.Section style={styles.portfolioList}>
+        {nfts?.map((value, index) => {
+          return (
+            <PortfolioList
+              key={index}
+              index={index + 1}
+              title={value.title}
+              description={value.description}
+              imageUrl={value.imageUrl}
+              price={value.price}
+              onPress={() => navigation.navigate("Portfolio Detail")}
+            />
+          );
+        })}
+      </List.Section>
     </ScrollView>
   )
 }
@@ -125,6 +79,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   portfolioList: {
-    justifyContent: 'center',
+    justifyContent: "center",
   },
 })

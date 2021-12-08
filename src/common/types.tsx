@@ -20,6 +20,9 @@ export type NFT = {
   type: string
   onVoting: boolean
   priceHistory: historyPoint[]
+  title: string;
+  description: string;
+  imageUrl: string;
 }
 
 export type portfolioWeight = {

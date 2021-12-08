@@ -8,31 +8,24 @@ type GovernListProp = {
   price: number;
   votes: number;
   approveRate: number;
-  project : string;
-  type : string;
+  project: string;
+  type: string;
+  onPress?: () => void;
 };
 
 export function GovernList(props: GovernListProp) {
-  const { index, nftId, price, votes, approveRate, project, type } = props;
+  const { index, nftId, price, votes, approveRate, project, type, onPress } =
+    props;
   return (
     <List.Item
-    
       title={`${nftId}`}
-      description ={`Purchase for ${price} ETH,\n${project}, ${type}`}
+      description={`Purchase for ${price} ETH,\n${project}, ${type}`}
       left={(props) => (
         <>
-          {
-            (index % 10 == 1) &&
-            <Text>{index}st NFT</Text>}
-          {
-            (index % 10 == 2) &&
-            <Text>{index}nd NFT</Text>}  
-          {
-            (index % 10 == 3) &&
-            <Text>{index}rd NFT</Text>}
-          {
-            (index % 10 > 3) &&
-            <Text>{index}th NFT</Text>}  
+          {index % 10 == 1 && <Text>{index}st NFT</Text>}
+          {index % 10 == 2 && <Text>{index}nd NFT</Text>}
+          {index % 10 == 3 && <Text>{index}rd NFT</Text>}
+          {index % 10 > 3 && <Text>{index}th NFT</Text>}
         </>
       )}
       right={(props) => (
@@ -40,6 +33,7 @@ export function GovernList(props: GovernListProp) {
           <Text>{`${votes} voted (${approveRate}% completed)`}</Text>
         </>
       )}
+      onPress={onPress}
     />
   );
 }
