@@ -7,51 +7,6 @@ import axios from 'axios'
 import { Box } from 'victory-native'
 import { NFT, portfolioWeight } from '../common/types'
 
-const portfolioDummy = [
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-  {
-    title: 'Dead Pool Collectible',
-    description: "Hi I'm dead ... pool",
-    imageUrl:
-      'https://pbs.twimg.com/profile_images/1208234904405757953/mT0cFOVQ.jpg',
-    price: 1000000,
-  },
-]
-
-const dummyStakeData = [
-  { x: 'Nam', y: 35 },
-  { x: 'Jang', y: 45 },
-  { x: 'Jeong', y: 75 },
-  { x: 'Shin', y: 200 },
-]
-
 export default function Portfolio() {
   const [nfts, setVotes] = useState<NFT[] | null>(null)
   const [portfolioWeights, setPortfolioWeights] = useState<
@@ -89,6 +44,7 @@ export default function Portfolio() {
   useEffect(() => {
     fetchData()
   }, [])
+  
   return (
     <ScrollView>
       {loading && <Box>Loading..</Box>}
@@ -107,6 +63,7 @@ export default function Portfolio() {
                   description={value.project}
                   imageUrl={value.project}
                   price={value.price}
+                  key={index + 1}
                 />
               )
             })}

@@ -20,8 +20,6 @@ function GovernDetail() {
     const result = await axios.get(
       'https://us-central1-enft-project.cloudfunctions.net/main/dao/-443191914/detail',
     )
-
-    console.log(result.data)
     const gov_distribution_raw = result.data.gov_distribution
     let distribution_array: Governer[] = []
     let totalShare: number = 0
@@ -49,6 +47,7 @@ function GovernDetail() {
   useEffect(() => {
     fetchData()
   }, [])
+  
   return (
     <ScrollView>
       {loading && <Box>Loading..</Box>}
