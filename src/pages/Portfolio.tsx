@@ -44,29 +44,32 @@ export default function Portfolio({ navigation }: any) {
   useEffect(() => {
     fetchData()
   }, [])
-
-
+  
   return (
     <ScrollView>
-      <VictoryPie
-        colorScale={["tomato", "orange", "gold", "cyan", "navy"]}
-        data={portfolioWeights!}
-      />
-      <List.Section style={styles.portfolioList}>
-        {nfts?.map((value, index) => {
-          return (
-            <PortfolioList
-              key={index}
-              index={index + 1}
-              title={value.title}
-              description={value.description}
-              imageUrl={value.imageUrl}
-              price={value.price}
-              onPress={() => navigation.navigate("Portfolio Detail")}
-            />
-          );
-        })}
-      </List.Section>
+      {loading && <Box>Loading..</Box>}
+      {nfts && portfolioWeights && (
+        <>
+          <VictoryPie
+            colorScale={['tomato', 'orange', 'gold', 'cyan', 'navy']}
+            data={portfolioWeights}
+          />
+          <List.Section style={styles.portfolioList}>
+            {nfts.map((value, index) => {
+              return (
+                <PortfolioList
+                  index={index + 1}
+                  title={value.nftId}
+                  description={value.description}
+                  imageUrl={value.imageUrl}
+                  price={value.price}
+                  key={index + 1}
+                />
+              )
+            })}
+          </List.Section>
+        </>
+      )}
     </ScrollView>
   )
 }

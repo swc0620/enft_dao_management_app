@@ -19,8 +19,6 @@ export default function Govern({ navigation }: any ) {
     const result = await axios.get(
       'https://us-central1-enft-project.cloudfunctions.net/main/dao/-443191914/detail',
     )
-
-    console.log(result.data)
     const gov_distribution_raw = result.data.gov_distribution
     let distribution_array: Governer[] = []
     let totalShare: number = 0
@@ -51,42 +49,47 @@ export default function Govern({ navigation }: any ) {
 
   return (
     <ScrollView nestedScrollEnabled={true}>
-      <ScrollView>
-        <List.Section style={{ justifyContent: "center" }}>
-          <List.Subheader> Governers</List.Subheader>
-          {govDistributionData?.map((v, i) => {
-            return (
-              <GovernerList
-                index={i + 1}
-                telegramId={v.telegramId}
-                share={v.share}
-                shareportion={v.share / totalShare}
-                voted={v.voted}
-              />
-            );
-          })}
-        </List.Section>
-      </ScrollView>
-      <ScrollView>
-        <List.Section style={{ justifyContent: "center" }}>
-          <List.Subheader>Governs</List.Subheader>
-          {nfts?.map((v, i) => {
-            return (
-              <GovernList
-                key={i}
-                index={i + 1}
-                nftId={v.nftId}
-                price={v.price}
-                votes={v.votes}
-                approveRate={v.approveRate}
-                project={v.project}
-                type={v.type}
-                onPress={() => navigation.navigate("Governance Detail")}
-              />
-            );
-          })}
-        </List.Section>
-      </ScrollView>
+      {loading && <Box>Loading..</Box>}
+      {govDistributionData && nfts && (
+        <>
+          <ScrollView>
+            <List.Section style={{ justifyContent: "center" }}>
+              <List.Subheader> Governers</List.Subheader>
+              {govDistributionData?.map((v, i) => {
+                return (
+                  <GovernerList
+                    index={i + 1}
+                    telegramId={v.telegramId}
+                    share={v.share}
+                    shareportion={v.share / totalShare}
+                    voted={v.voted}
+                  />
+                );
+              })}
+            </List.Section>
+          </ScrollView>
+          <ScrollView>
+            <List.Section style={{ justifyContent: "center" }}>
+              <List.Subheader>Governs</List.Subheader>
+              {nfts?.map((v, i) => {
+                return (
+                  <GovernList
+                    key={i}
+                    index={i + 1}
+                    nftId={v.nftId}
+                    price={v.price}
+                    votes={v.votes}
+                    approveRate={v.approveRate}
+                    project={v.project}
+                    type={v.type}
+                    onPress={() => navigation.navigate("Governance Detail")}
+                  />
+                );
+              })}
+            </List.Section>
+          </ScrollView>
+        </>
+      )}
     </ScrollView>
   );
 }
@@ -96,4 +99,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
   },
+  governersList: {
+    justifyContent: 'center'
+  },
+  governsList: {
+    justifyContent: 'center' 
+  }
 })
