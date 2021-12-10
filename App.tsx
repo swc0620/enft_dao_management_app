@@ -12,9 +12,12 @@ export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MAIN" screenOptions={{headerShown: false}}>
-          <Stack.Screen name="SIGNIN" component={SignInPage}/> 
-          <Stack.Screen name="TABBAR" component={TabBar}/>
+        <Stack.Navigator
+          initialRouteName="MAIN"
+          screenOptions={{ headerShown: false }}
+        >
+          <Stack.Screen name="SIGNIN" component={SignInPage} />
+          <Stack.Screen name="TABBAR" component={TabBar} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
