@@ -20,7 +20,6 @@ This project contains DAO MANAGEMENT APP developed by team "ENFT" from SNU Field
 ![Slide18](https://github.com/swc0620/enft_dao_management_app/blob/master/images/Slide18.JPG)
 ![Slide19](https://github.com/swc0620/enft_dao_management_app/blob/master/images/Slide19.JPG)
 ![Slide20](https://github.com/swc0620/enft_dao_management_app/blob/master/images/Slide20.JPG)
-![Slide21](https://github.com/swc0620/enft_dao_management_app/blob/master/images/Slide21.JPG)
 
 # Specification
 * React-Native (TypeScript)
